@@ -1,13 +1,13 @@
 # Phaser Angular Template
 
-This is a Phaser 3 project template that uses the Angular framework. It includes a bridge for Angular to Phaser game communication, hot-reloading for quick development workflow and scripts to generate production-ready builds.
+This is a Phaser 3 project template that uses the VueJs framework. It includes a bridge for VueJS to Phaser game communication, hot-reloading for quick development workflow and scripts to generate production-ready builds.
 
 ### Versions
 
 This template has been updated for:
 
 - [Phaser 3.88.2](https://github.com/phaserjs/phaser)
-- [Angular 17.2.0](https://github.com/angular)
+- [VueJS 17.2.0](https://github.com/angular)
 - [TypeScript 5.3.2](https://github.com/microsoft/TypeScript)
 
 ![screenshot](screenshot.png)
@@ -31,38 +31,38 @@ This template has been updated for:
 
 After cloning the repo, run `npm install` from your project directory. Install ng cli with `npm install -g @angular/cli`. Then, you can start the local development server by running `npm run dev`.
 
-The local development server runs on `http://localhost:8080` by default. Please see the Angular documentation if you wish to change this, or add SSL support.
+The local development server runs on `http://localhost:8080` by default. Please see the VueJS documentation if you wish to change this, or add SSL support.
 
-Once the server is running you can edit any of the files in the `src` folder. Angular will automatically recompile your code and then reload the browser.
+Once the server is running you can edit any of the files in the `src` folder. VueJS will automatically recompile your code and then reload the browser.
 
 ## Template Project Structure
 
 We have provided a default project structure to get you started. This is as follows:
 
-- `index.html` - The HTML Angular entry point.
-- `src` - Contains the Angular source code.
-- `src/main.ts` - The main **Angular** entry point. This bootstraps the Angular application.
-- `src/app/app.component.ts` - The main Angular component.
-- `src/app/app.component.html` - The main HTML Angular component.
-- `src/game/phaser-game.component.ts` - The Angular component that initializes the Phaser Game and serve like a bridge between Angular and Phaser.
-- `src/game/EventBus.ts` - A simple event bus to communicate between Angular and Phaser.
+- `index.html` - The HTML VueJS entry point.
+- `src` - Contains the VueJS source code.
+- `src/main.ts` - The main **VueJS** entry point. This bootstraps the VueJS application.
+- `src/app/app.component.ts` - The main VueJS component.
+- `src/app/app.component.html` - The main HTML VueJS component.
+- `src/game/phaser-game.component.ts` - The VueJS component that initializes the Phaser Game and serve like a bridge between VueJS and Phaser.
+- `src/game/EventBus.ts` - A simple event bus to communicate between VueJS and Phaser.
 - `src/game` - Contains the game source code.
 - `src/game/main.ts` - The main **game** entry point. This contains the game configuration and start the game.
 - `src/game/scenes/` - The Phaser Scenes are in this folder.
 - `src/style.css` - Some simple CSS rules to help with page layout.
 - `src/assets` - Contains the static assets used by the game.
 
-## Angular Bridge
+## VueJS Bridge
 
-The `phaser-game.component.ts` component is the bridge between Angular and Phaser. It initializes the Phaser game and passes events between the two.
+The `phaser-game.component.ts` component is the bridge between VueJS and Phaser. It initializes the Phaser game and passes events between the two.
 
-To communicate between Angular and Phaser, you can use the **EventBus.ts** file. This is a simple event bus that allows you to emit and listen for events from both Angular and Phaser.
+To communicate between VueJS and Phaser, you can use the **EventBus.ts** file. This is a simple event bus that allows you to emit and listen for events from both VueJS and Phaser.
 
 ```js
-// In Angular
+// In VueJS
 import { EventBus } from './EventBus';
 
-// In any Angular component method
+// In any VueJS component method
 // Emit an event
 EventBus.emit('event-name', data);
 
@@ -73,7 +73,7 @@ EventBus.on('event-name', (data) => {
 });
 ```
 
-In addition to this, the `phaser-game` component exposes the Phaser game instance along with the most recently active Phaser Scene. You can pick these up from Angular via `@ViewChild(PhaserGame) phaserRef!: PhaserGame;` (we explain this later).
+In addition to this, the `phaser-game` component exposes the Phaser game instance along with the most recently active Phaser Scene. You can pick these up from VueJS via `@ViewChild(PhaserGame) phaserRef!: PhaserGame;` (we explain this later).
 
 ## Phaser Scene Handling
 
@@ -81,7 +81,7 @@ In Phaser, the Scene is the lifeblood of your game. It is where you sprites, gam
 
 You can get the current Phaser Scene from the component event `"current-active-scene"`. In order to do this, you need to emit the event `"current-scene-ready"` from the Phaser Scene class. This event should be emitted when the scene is ready to be used. You can see this done in all of the Scenes in our template.
 
-**Important**: When you add a new Scene to your game, make sure you expose to Angular by emitting the `"current-scene-ready"` event via the `EventBus`, like this:
+**Important**: When you add a new Scene to your game, make sure you expose to VueJS by emitting the `"current-scene-ready"` event via the `EventBus`, like this:
 
 
 ```js
@@ -102,11 +102,11 @@ class MyScene extends Phaser.Scene
 }
 ```
 
-You don't have to emit this event if you don't need to access the specific scene from Angular. Also, you don't have to emit it at the end of `create`, you can emit it at any point. For example, should your Scene be waiting for a network request or API call to complete, it could emit the event once that data is ready.
+You don't have to emit this event if you don't need to access the specific scene from VueJS. Also, you don't have to emit it at the end of `create`, you can emit it at any point. For example, should your Scene be waiting for a network request or API call to complete, it could emit the event once that data is ready.
 
-### Angular Component Example
+### VueJS Component Example
 
-Here's an example of how to access Phaser data for use in a Angular Component:
+Here's an example of how to access Phaser data for use in a VueJS Component:
 
 ```ts
 import { PhaserGame } from '../game/phaser-game.component';
@@ -171,9 +171,9 @@ In order to deploy your game, you will need to upload *all* of the contents of t
 
 ## Customizing the Template
 
-### Angular
+### VueJS
 
-If you want to customize your build, such as adding plugin (i.e. for loading CSS or fonts), you can modify the `angular.json` file for cross-project changes, or you can modify and/or create new configuration files and target them in specific npm tasks inside of `package.json`. Please see the [Angular documentation](https://angular.io/guide/workspace-config) for more information.
+If you want to customize your build, such as adding plugin (i.e. for loading CSS or fonts), you can modify the `VueJS.json` file for cross-project changes, or you can modify and/or create new configuration files and target them in specific npm tasks inside of `package.json`. Please see the [VueJS documentation](https://angular.io/guide/workspace-config) for more information.
 
 ## About log.js
 

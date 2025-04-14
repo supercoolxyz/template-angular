@@ -8,7 +8,7 @@ import { EventBus } from '../game/EventBus';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [CommonModule, RouterOutlet, PhaserGame],
+    imports: [CommonModule, PhaserGame],
     templateUrl: './app.component.html'
 })
 export class AppComponent implements AfterViewInit

@@ -1,4 +1,4 @@
-import { Waypoint } from '../../game/Waypoint';
+import { Waypoint } from './Waypoint';
 
 export class Entity {
     pos: any;
