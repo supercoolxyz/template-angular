@@ -1,17 +1,16 @@
+import { Vec2 } from "./Vec2";
+
 export class Waypoint {
     public connections: Waypoint[] = []; // Array to store connected waypoints
 
     constructor(
-        public x: number,
-        public y: number,
+        public position: Vec2, // Position of the waypoint as a Vec2
         public label?: string // Optional label for the waypoint
     ) {}
 
     // Calculate the distance to another waypoint
     distanceTo(other: Waypoint): number {
-        const dx = this.x - other.x;
-        const dy = this.y - other.y;
-        return Math.sqrt(dx * dx + dy * dy);
+        return this.position.distanceTo(other.position);
     }
 
     // Add a connection to another waypoint
@@ -28,6 +27,8 @@ export class Waypoint {
 
     // Convert the waypoint to a string representation
     toString(): string {
-        return this.label ? `${this.label} (${this.x}, ${this.y})` : `(${this.x}, ${this.y})`;
+        return this.label
+            ? `${this.label} ${this.position.toString()}`
+            : this.position.toString();
     }
 }
