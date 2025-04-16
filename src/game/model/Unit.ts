@@ -1,6 +1,9 @@
+
 import { Vec2 } from "./Vec2";
 import { Waypoint } from "./Waypoint";
+import { Waypoints } from "./Waypoints";
 
+// The Unit class represents a generic unit in the game, which can be a vehicle, tower, or enemy.
 export class Unit {
     constructor(
         public position: Vec2, // Position of the unit as a Vec2
@@ -54,12 +57,48 @@ export class Vehicle extends Unit {
         return this.health;
     }
 
-    // Update the vehicle's position based on its speed and angle
+    // Update the vehicle's position and angle based on its speed and target waypoint
     update(dt: number): void {
-        const radians = (this.angle * Math.PI) / 180;
-        const dx = Math.cos(radians) * this.speed * dt;
-        const dy = Math.sin(radians) * this.speed * dt;
+        if (!this.targetWaypoint) {
+            console.log("No target waypoint set.");
+            return;
+        }
+
+        // Calculate the direction vector to the target waypoint
+        const direction = this.targetWaypoint.position.subtract(this.position);
+
+        // Calculate the angle to the target waypoint
+        const targetAngle = Math.atan2(direction.y, direction.x) * (180 / Math.PI);
+
+        // Gradually adjust the angle to face the target waypoint
+        const angleDifference = targetAngle - this.angle;
+        this.angle += angleDifference * 0.1; // Smooth rotation factor (adjust as needed)
+
+        // Normalize the direction vector
+        const normalizedDirection = direction.normalize();
+
+        // Update the position based on speed, direction, and delta time
+        const dx = normalizedDirection.x * this.speed * dt;
+        const dy = normalizedDirection.y * this.speed * dt;
         this.position = this.position.add(new Vec2(dx, dy));
+
+        // Check if the vehicle has reached the target waypoint
+        if (this.position.distanceTo(this.targetWaypoint.position) < this.speed * dt) {
+            console.log(`Reached waypoint: ${this.targetWaypoint.toString()}`);
+            this.position = this.targetWaypoint.position; // Snap to the waypoint
+            this.targetWaypoint = this.getNextWaypoint(); // Move to the next waypoint
+        }
+    }
+
+    // Set the target waypoint
+    setTargetWaypoint(waypoint: Waypoint): void {
+        this.targetWaypoint = waypoint;
+    }
+
+    // Get the next waypoint in the list
+    private getNextWaypoint(): Waypoint | undefined {
+        const currentIndex = this.waypoints.indexOf(this.targetWaypoint!);
+        return this.waypoints[currentIndex + 1];
     }
 }
 
