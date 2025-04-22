@@ -1,4 +1,3 @@
-
 import { Vec2 } from "./Vec2";
 import { Waypoint } from "./Waypoint";
 import { Waypoints } from "./Waypoints";
@@ -26,6 +25,8 @@ export class Unit {
     }
 }
 
+// The Vehicle class represents a vehicle unit in the game, which can follow waypoints and has health and speed properties.
+// It extends the Unit class to inherit its properties and methods.
 export class Vehicle extends Unit {
     private targetWaypoint?: Waypoint; // Optional property to track the current waypoint
 
@@ -102,6 +103,8 @@ export class Vehicle extends Unit {
     }
 }
 
+// The Tower class represents a tower unit in the game, which can attack enemy units within its range.
+// It extends the Unit class to inherit its properties and methods.
 export class Tower extends Unit {
     private level: number = 1; // Level of the tower
     private targetUnit?: Unit; // Optional property to track the current target unit
@@ -125,8 +128,46 @@ export class Tower extends Unit {
             console.log(`Target out of range!`);
         }
     }
+
+    // Level up the tower to increase its stats
+    levelUp(): void {
+        this.level++;
+        this.range += 10; // Increase range by 10 units per level
+        this.damage += 5; // Increase damage by 5 units per level
+        console.log(
+            `Tower leveled up to Level ${this.level}. New Range: ${this.range}, New Damage: ${this.damage}`
+        );
+    }
+
+    // Get the current level of the tower
+    getLevel(): number {
+        return this.level;
+    }
 }
 
+// The TowerConfig class represents the configuration for a tower, including its initial stats and increments per level.
+// It can be used to create different types of towers with varying stats.
+export class TowerConfig {
+    constructor(
+        public initialRange: number, // Initial range of the tower
+        public initialDamage: number, // Initial damage of the tower
+        public rangeIncrement: number, // Range increment per level
+        public damageIncrement: number // Damage increment per level
+    ) {}
+}
+
+// The VehicleConfig class represents the configuration for a vehicle, including its initial stats and increments per level.
+// It can be used to create different types of vehicles with varying stats.
+export class VehicleConfig {
+    constructor(
+        public initialHealth: number, // Initial health of the vehicle
+        public initialSpeed: number, // Initial speed of the vehicle
+        public speedIncrement: number // Speed increment per level
+    ) {}
+}
+
+// The Enemy class represents an enemy unit in the game, which can take damage and has health properties.
+// It extends the Unit class to inherit its properties and methods.
 export class Enemy extends Unit {
     constructor(
         position: Vec2,
@@ -145,4 +186,13 @@ export class Enemy extends Unit {
     isAlive(): boolean {
         return this.health > 0;
     }
+}
+
+// The EnemyConfig class represents the configuration for an enemy, including its initial stats and increments per level.
+// It can be used to create different types of enemies with varying stats.
+export class EnemyConfig {
+    constructor(
+        public initialHealth: number, // Initial health of the enemy
+        public healthIncrement: number // Health increment per level
+    ) {}
 }
