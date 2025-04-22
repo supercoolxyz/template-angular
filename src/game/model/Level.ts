@@ -1,7 +1,11 @@
+
 import { Vehicle } from "./Unit";
+
 import { Tower } from "./Unit";
 import { Waypoint } from "./Waypoint";
-import { Grid, GridConfig } from "./Grid";
+
+import { Grid } from "./Grid";
+import { GridConfig } from "./config";
 
 // The Level class represents a game level, which contains vehicles, towers, waypoints, and a grid for managing tower placement.
 // It provides methods to add vehicles, towers, and waypoints, update vehicles, command towers to attack, and get a summary of the level.

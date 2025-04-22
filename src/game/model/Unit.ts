@@ -1,6 +1,5 @@
 import { Vec2 } from "./Vec2";
 import { Waypoint } from "./Waypoint";
-import { Waypoints } from "./Waypoints";
 
 // The Unit class represents a generic unit in the game, which can be a vehicle, tower, or enemy.
 export class Unit {
@@ -145,26 +144,6 @@ export class Tower extends Unit {
     }
 }
 
-// The TowerConfig class represents the configuration for a tower, including its initial stats and increments per level.
-// It can be used to create different types of towers with varying stats.
-export class TowerConfig {
-    constructor(
-        public initialRange: number, // Initial range of the tower
-        public initialDamage: number, // Initial damage of the tower
-        public rangeIncrement: number, // Range increment per level
-        public damageIncrement: number // Damage increment per level
-    ) {}
-}
-
-// The VehicleConfig class represents the configuration for a vehicle, including its initial stats and increments per level.
-// It can be used to create different types of vehicles with varying stats.
-export class VehicleConfig {
-    constructor(
-        public initialHealth: number, // Initial health of the vehicle
-        public initialSpeed: number, // Initial speed of the vehicle
-        public speedIncrement: number // Speed increment per level
-    ) {}
-}
 
 // The Enemy class represents an enemy unit in the game, which can take damage and has health properties.
 // It extends the Unit class to inherit its properties and methods.
@@ -186,13 +165,4 @@ export class Enemy extends Unit {
     isAlive(): boolean {
         return this.health > 0;
     }
-}
-
-// The EnemyConfig class represents the configuration for an enemy, including its initial stats and increments per level.
-// It can be used to create different types of enemies with varying stats.
-export class EnemyConfig {
-    constructor(
-        public initialHealth: number, // Initial health of the enemy
-        public healthIncrement: number // Health increment per level
-    ) {}
 }
