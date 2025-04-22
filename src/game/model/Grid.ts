@@ -34,7 +34,7 @@ class TGrid<T> {
         return this.grid[row][col];
     }
 
-    // Set the cell in the grid based on row and column indices
+    // Set the cell in the grid based on row and column indices  
     setCell(row: number, col: number, value: T): void {
         // Check if the row and column indices are within bounds
         // If not, throw an error
@@ -50,49 +50,16 @@ class TGrid<T> {
 // The Grid class represents a grid of towers in a tower defense game.
 // It provides methods to place and remove towers, check for valid cells, and convert world positions to grid cells.
 // It uses a 2D array to store the towers and their positions.
-export class Grid  extends TGrid<Tower | null> {
+export class Grid extends TGrid<any> {
 
     public cellWidth: number; // Width of each grid cell
     public cellHeight: number; // Height of each grid cell
 
+    // The grid is a 2D array of cells, where each cell can hold a tower or be empty
     constructor(private config: GridConfig) {
-        super(config.rows, config.cols);
+        super(config.rows, config.cols); // Call the parent constructor with rows and columns
         this.cellWidth = config.cellWidth; // Set the cell width from the configuration
         this.cellHeight = config.cellHeight; // Set the cell height from the configuration
-    }
-
-    // Place a tower at a specific grid cell
-    placeTower(row: number, col: number, tower: Tower): boolean {
-        if (this.isValidCell(row, col) && this.grid[row][col] === null) {
-            this.grid[row][col] = tower;
-            console.log(`Tower placed at (${row}, ${col})`);
-            return true;
-        } else {
-            console.log(`Cannot place tower at (${row}, ${col}). Cell is invalid or occupied.`);
-            return false;
-        }
-    }
-
-    // Remove a tower from a specific grid cell
-    removeTower(row: number, col: number): boolean {
-        if (this.isValidCell(row, col) && this.grid[row][col] !== null) {
-            this.grid[row][col] = null;
-            console.log(`Tower removed from (${row}, ${col})`);
-            return true;
-        } else {
-            console.log(`Cannot remove tower from (${row}, ${col}). Cell is invalid or empty.`);
-            return false;
-        }
-    }
-
-    // Get the tower at a specific grid cell
-    getTower(row: number, col: number): Tower | null {
-        if (this.isValidCell(row, col)) {
-            return this.grid[row][col];
-        } else {
-            console.log(`Invalid cell (${row}, ${col})`);
-            return null;
-        }
     }
 
     // Convert a world position to a grid cell
@@ -108,7 +75,7 @@ export class Grid  extends TGrid<Tower | null> {
     }
 
     // Check if a cell is valid
-    private isValidCell(row: number, col: number): boolean {
+    isValidCell(row: number, col: number): boolean {
         return row >= 0 && row < this.config.rows && col >= 0 && col < this.config.cols;
     }
 }
