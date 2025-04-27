@@ -5,10 +5,21 @@ import { Unit } from "./Unit";
 import { Vec2 } from "./Vec2";
 import { Vehicle } from "./Vehicle";
 
+// The TowerConfig class represents the configuration for a tower, including its initial stats and increments per level.
+// It can be used to create different types of towers with varying stats.
+export class TowerConfig {
+    constructor(
+        public initialRange: number, // Initial range of the tower
+        public initialDamage: number, // Initial damage of the tower
+        public rangeIncrement: number, // Range increment per level
+        public damageIncrement: number // Damage increment per level
+    ) {}
+}
+
 // It extends the Unit class to inherit its properties and methods.
 export class Tower extends Unit {
     private level: number = 1; // Level of the tower
-    private targetUnit?: Unit; // Optional property to track the current target unit
+    private targetVehicle?: Vehicle; // Optional property to track the current target unit
 
     constructor(
         position: Vec2,

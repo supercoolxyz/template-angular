@@ -5,6 +5,16 @@ import { Vec2 } from "./Vec2";
 import { Waypoint } from "./Waypoint";
 import { Unit } from "./Unit";
 
+// The VehicleConfig class represents the configuration for a vehicle, including its initial stats and increments per level.
+// It can be used to create different types of vehicles with varying stats.
+export class VehicleConfig {
+    constructor(
+        public initialHealth: number, // Initial health of the vehicle
+        public initialSpeed: number, // Initial speed of the vehicle
+        public speedIncrement: number // Speed increment per level
+    ) {}
+}
+
 // It extends the Unit class to inherit its properties and methods.
 export class Vehicle extends Unit {
     private targetWaypoint?: Waypoint; // Optional property to track the current waypoint

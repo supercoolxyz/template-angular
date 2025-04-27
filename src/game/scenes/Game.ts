@@ -6,6 +6,7 @@ export class Game extends Scene
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     gameText: Phaser.GameObjects.Text;
+    grid: Phaser.GameObjects.Grid | null = null;
 
     constructor ()
     {
@@ -25,6 +26,8 @@ export class Game extends Scene
             stroke: '#000000', strokeThickness: 4,
             align: 'center'
         }).setOrigin(0.5).setDepth(100);
+
+        this.grid = this.add.grid(0, 0, 1000, 1000, 64, 64, 0x7c7c7c, 0.3, 0x000000, 0.3);
 
         EventBus.emit('current-scene-ready', this);
     }
