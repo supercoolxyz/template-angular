@@ -16,7 +16,8 @@ export class MainMenu extends Scene
 
     create ()
     {
-        this.background = this.add.image(512, 384, 'background');
+        // this.background = this.add.image(512, 384, 'background');
+        this.background = this.add.image(512, 384, 'road_tilesheet');
 
         this.logo = this.add.image(512, 300, 'logo').setDepth(100);
 

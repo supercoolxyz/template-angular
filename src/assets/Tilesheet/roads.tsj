@@ -1,5 +1,5 @@
 { "columns":12,
- "image":"roadTextures_tilesheet.png",
+ "image":"road_tilesheet.png",
  "imageheight":512,
  "imagewidth":768,
  "margin":0,
@@ -10,27 +10,27 @@
  "tileheight":64,
  "tiles":[
         {
-         "class":"gvr",
+         "class":"gtv",
          "id":0
         }, 
         {
-         "class":"gtlr",
+         "class":"gtlt",
          "id":1
         }, 
         {
-         "class":"gtrr",
+         "class":"gtrt",
          "id":2
         }, 
         {
-         "class":"ghr",
+         "class":"gth",
          "id":12
         }, 
         {
-         "class":"gblr",
+         "class":"gblt",
          "id":13
         }, 
         {
-         "class":"gbrr",
+         "class":"gbrt",
          "id":14
         }, 
         {
@@ -38,8 +38,36 @@
          "id":24
         }, 
         {
-         "class":"s",
+         "class":"c",
          "id":25
+        }, 
+        {
+         "class":"gl3r",
+         "id":28
+        }, 
+        {
+         "class":"w",
+         "id":36
+        }, 
+        {
+         "class":"t",
+         "id":37
+        }, 
+        {
+         "class":"gwv",
+         "id":48
+        }, 
+        {
+         "class":"ghw",
+         "id":60
+        }, 
+        {
+         "class":"gswv",
+         "id":72
+        }, 
+        {
+         "class":"gswh",
+         "id":84
         }],
  "tilewidth":64,
  "type":"tileset",
