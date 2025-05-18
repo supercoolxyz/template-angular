@@ -16,12 +16,32 @@ export class PhaserGame implements OnInit
 
     sceneCallback: (scene: Phaser.Scene) => void;
 
+    private resizeGameWindow(width: number, height: number): void {
+        debugger;
+        const gameContainer = document.getElementById('game-container');
+        if (gameContainer) {
+            gameContainer.style.width = `${width}px`;
+            gameContainer.style.height = `${height}px`;
+        }
+
+        this.game.scale.resize(width, height);
+        this.game.scale.refresh();
+    }
+
+
     ngOnInit()
     {
         this.game = StartGame('game-container');
 
         EventBus.on('current-scene-ready', (scene: Phaser.Scene) => {
 
+            
+            window.onresize = (): any => {
+                this.resizeGameWindow(window.innerWidth, window.innerHeight);
+            };
+ 
+            this.resizeGameWindow(window.innerWidth, window.innerHeight);
+            
             this.scene = scene;
 
             if (this.sceneCallback)
